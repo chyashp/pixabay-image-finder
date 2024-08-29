@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import TextField from "material-ui/TextField";
-import SelectField from "material-ui/SelectField";
-import MenuItem from "material-ui/MenuItem";
+import TextField from "@mui/material/TextField";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 import ImageResults from "../image-results/ImageResults";
+
 class Search extends Component {
   state = {
     searchText: "",
@@ -29,33 +32,39 @@ class Search extends Component {
     });
   };
 
-  onAmountChange = (e, index, value) => {
-    this.setState({ amount: value });
+  onAmountChange = (e) => {
+    this.setState({ amount: e.target.value });
   };
+
   render() {
     console.log(this.state.images);
     return (
       <div>
         <TextField
           name="searchText"
+          label="Search For Images"
           value={this.state.searchText}
           onChange={this.onTextChange}
-          floatingLabelText="Search For Images"
-          fullWidth={true}
+          fullWidth
+          variant="outlined"
+          margin="normal"
         />
         <br />
-        <SelectField
-          name="amount"
-          floatingLabelText="Amount"
-          value={this.state.amount}
-          onChange={this.onAmountChange}
-        >
-          <MenuItem value={5} primaryText="5" />
-          <MenuItem value={10} primaryText="10" />
-          <MenuItem value={15} primaryText="15" />
-          <MenuItem value={30} primaryText="30" />
-          <MenuItem value={50} primaryText="50" />
-        </SelectField>
+        <FormControl fullWidth margin="normal">
+          <InputLabel>Amount</InputLabel>
+          <Select
+            name="amount"
+            value={this.state.amount}
+            onChange={this.onAmountChange}
+            label="Amount"
+          >
+            <MenuItem value={5}>5</MenuItem>
+            <MenuItem value={10}>10</MenuItem>
+            <MenuItem value={15}>15</MenuItem>
+            <MenuItem value={30}>30</MenuItem>
+            <MenuItem value={50}>50</MenuItem>
+          </Select>
+        </FormControl>
         <br />
         {this.state.images.length > 0 ? (
           <ImageResults images={this.state.images} />
@@ -64,4 +73,5 @@ class Search extends Component {
     );
   }
 }
+
 export default Search;

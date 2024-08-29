@@ -1,64 +1,66 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { GridList, GridTile } from "material-ui/GridList";
-import IconButton from "material-ui/IconButton";
-import ZoomIn from "material-ui/svg-icons/action/zoom-in";
-import Dialog from "material-ui/Dialog";
-import FlatButton from "material-ui/FlatButton";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 class ImageResults extends Component {
   state = {
     open: false,
     currentImg: "",
   };
+
   handleOpen = (img) => {
     this.setState({ open: true, currentImg: img });
   };
+
   handleClose = () => {
     this.setState({ open: false });
   };
+
   render() {
-    let imageListContent;
     const { images } = this.props;
-    if (images) {
-      imageListContent = (
-        <GridList cols={3}>
-          {images.map((img) => (
-            <GridTile
-              title={img.tags}
-              key={img.id}
-              subtitle={
-                <span>
-                  by <strong>{img.user}</strong>
-                </span>
-              }
-              actionIcon={
-                <IconButton onClick={() => this.handleOpen(img.largeImageURL)}>
-                  <ZoomIn color="white" />
-                </IconButton>
-              }
-            >
-              <img src={img.largeImageURL} alt="" />
-            </GridTile>
-          ))}
-        </GridList>
-      );
-    } else {
-      imageListContent = null;
-    }
-    const actions = [
-      <FlatButton label="Close" primary={true} onClick={this.handleClose} />,
-    ];
+    const { open, currentImg } = this.state;
+
     return (
       <div>
-        {imageListContent}
-        <Dialog
-          actions={actions}
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
-          <img src={this.state.currentImg} alt="" style={{ width: "100%" }} />
+        <Grid container spacing={2}>
+          {images &&
+            images.map((img) => (
+              <Grid item xs={12} sm={6} md={4} key={img.id}>
+                <Typography variant="subtitle1" gutterBottom>
+                  {img.tags} by <strong>{img.user}</strong>
+                </Typography>
+                <img
+                  src={img.largeImageURL}
+                  alt={img.tags}
+                  style={{ width: "100%" }}
+                />
+                <IconButton
+                  onClick={() => this.handleOpen(img.largeImageURL)}
+                  color="primary"
+                  aria-label="zoom"
+                >
+                  <ZoomInIcon />
+                </IconButton>
+              </Grid>
+            ))}
+        </Grid>
+
+        <Dialog open={open} onClose={this.handleClose}>
+          <DialogContent>
+            <img src={currentImg} alt="Zoomed" style={{ width: "100%" }} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Close
+            </Button>
+          </DialogActions>
         </Dialog>
       </div>
     );
