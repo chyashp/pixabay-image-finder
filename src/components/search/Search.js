@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import TextField from "@mui/material/TextField";
-import SelectField from "@mui/material/SelectField";
-import MenuItem from "@mui/material/MenuItem";
+import TextField from "material-ui/TextField";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 import axios from "axios";
-import ImageResults from "../../image-results/ImageResults";
-
+import ImageResults from "../image-results/ImageResults";
 class Search extends Component {
   state = {
     searchText: "",

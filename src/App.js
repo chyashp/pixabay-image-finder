@@ -1,6 +1,6 @@
 import "./App.css";
 import NavBar from "./components/navbar/NavBar";
-import MuiThemeProvider from "@mui/material/styles/MuiThemeProvider";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Search from "./components/search/Search";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <MuiThemeProvider>
       <div>
         <NavBar />
-        <Search/>
+        <Search />
       </div>
     </MuiThemeProvider>
   );
