@@ -1,6 +1,6 @@
 import "./App.css";
 import NavBar from "./components/navbar/NavBar";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import MuiThemeProvider from "@mui/material/styles/MuiThemeProvider";
 import Search from "./components/search/Search";
 
 function App() {
