@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import SelectField from "@mui/material/SelectField";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "axios";
-import ImageResults from "../../ImageResults/ImageResults";
+import ImageResults from "../../image-results/ImageResults";
 
 class Search extends Component {
   state = {
